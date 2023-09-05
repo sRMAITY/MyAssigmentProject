@@ -1,12 +1,15 @@
 package com.assignmentapplication.utils
 
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
+import androidx.appcompat.app.AlertDialog
 import com.assignmentapplication.R
 
 
@@ -32,7 +35,10 @@ class CustomProgressDialogue(  ) {
         }
     }
 
-     fun showDialog(context: Context){
+    /**
+     * show custom progress dialog
+     */
+    fun showDialog(context: Context){
          if (dialog != null && dialog?.isShowing()!!) {
              return;
          }
@@ -46,6 +52,26 @@ class CustomProgressDialogue(  ) {
          dialog?.show()
      }
 
+    // show alert dialog
+     fun showAlertdialog(context: Context, msg : String){
+         val dialogBuilder = AlertDialog.Builder(context)
+         // set message for alert dialog box
+         dialogBuilder.setMessage(msg)
+             .setCancelable(false)
+
+             .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                     dialog, id -> dialog.dismiss()
+             })
+         val alert = dialogBuilder.create()
+         // set title for alert dialog box
+         alert.setTitle(context.resources.getString(R.string.app_name))
+         // show alert dialog
+         alert.show()
+     }
+
+    /**
+     * Dismiss progress dialog
+     */
     fun dismissDialog(){
         if (dialog != null && dialog!!.isShowing()) {
             dialog?.dismiss();

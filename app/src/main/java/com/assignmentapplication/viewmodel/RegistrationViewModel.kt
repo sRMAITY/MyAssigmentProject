@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.assignmentapplication.data.repository.AuthRepository
+import com.assignmentapplication.utils.CustomAlertdialog
 import com.assignmentapplication.utils.MyCustomException
 import com.assignmentapplication.utils.NetworkHelper
 import com.assignmentapplication.utils.Resource
@@ -18,13 +19,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(private val repository: AuthRepository,
-                                                private val networkHelper: NetworkHelper,
-                                              ) : ViewModel() {
+                                                private val networkHelper: NetworkHelper) : ViewModel() {
 
     private val _signupFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val signupFlow: StateFlow<Resource<FirebaseUser>?> = _signupFlow
 
 
+    /**
+     *  internet check and call firebase create user
+     */
     fun signupUser(name: String, email: String, password: String) = viewModelScope.launch {
         if (networkHelper.isNetworkConnected()) {
              _signupFlow.value = Resource.Loading
@@ -36,13 +39,6 @@ class RegistrationViewModel @Inject constructor(private val repository: AuthRepo
     }
 
 
-/*
-    fun register(email: String?, password: String?) {
-        appAuthRepository.signup(email!!, password!!)
-    }
 
-    fun getUserLiveData(): MutableLiveData<FirebaseUser> {
-        return userLiveData
-    }*/
 
 }

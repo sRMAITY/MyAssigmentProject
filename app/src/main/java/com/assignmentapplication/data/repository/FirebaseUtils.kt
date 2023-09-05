@@ -4,6 +4,10 @@ import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resumeWithException
 
+
+/**
+ * Extension function await of Task
+ */
 suspend fun <T> Task<T>.await() : T {
     return  suspendCancellableCoroutine { cont ->
          addOnCompleteListener{

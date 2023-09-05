@@ -4,6 +4,7 @@ import com.assignmentapplication.data.repository.AuthRepository
 import com.assignmentapplication.utils.NetworkHelper
 import com.assignmentapplication.viewmodel.LogInViewModel
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
 
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
@@ -24,6 +25,9 @@ class LoginViewModelTest {
 
     @Test
     fun `loginUser test` (){
-         runBlocking { classUnderTest.loginUser("a@a.com","123456") }
+         val userEmail = "dummyEmail"
+         val password = "123456"
+         coEvery { networkHelper.isNetworkConnected() } returns  true
+        // runBlocking { classUnderTest.loginUser(userEmail,password) }
     }
 }

@@ -11,6 +11,10 @@ import javax.inject.Singleton
 @Singleton
 class NetworkHelper @Inject constructor(@ApplicationContext private val context: Context) {
 
+
+    /**
+     *  check is internet connected or not
+     */
     fun isNetworkConnected(): Boolean {
         var result = false
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
